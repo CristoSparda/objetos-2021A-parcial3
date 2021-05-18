@@ -7,18 +7,13 @@ public class Student{
      int size;
      String studentName;
      int studentID;
-     int[] score;
-     int prom;
+     double[] score;
+     double prom;
 
-     public Student(){
-         this.array = new Object[2];
-     }
-
-    public Student(String name, int id) {
-         this.studentName = name;
-         this.studentID = id;
+    public Student(String studentName, int studentID) {
+        this.studentName = studentName;
+        this.studentID = studentID;
     }
-
 
     public int getCode(){
          return studentID;
@@ -32,10 +27,15 @@ public class Student{
          this.score[position] = score;
     }
 
-
-    public List<Student> getStudents() {
-         return array;
+    public void setAverage(){
+        for (int i = 0; i < size; i++) {
+            prom += score[i];
+        }
+        prom /= size;
     }
 
-    addStudent
+    public double getAverage() {
+        return prom;
+    }
+
 }

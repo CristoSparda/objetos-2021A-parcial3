@@ -1,45 +1,46 @@
 package uaslp.objetos.exams;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Group {
+    List<Student> list = new LinkedList<>();
+    int avaiability, capacity;
+    double generalAverage;
 
 
-public class Group implements Student{
-    Student student = new Student();
-    int avaiability,capacity;
 
     public Group(int size) {
         this.capacity = size;
     }
 
 
-    public void addStudent(String studentName, int studentId){
-        if(this.student.size == capacity ){
-            Object[] anterior = this.student.array;
-            this.student.array = new Object[this.student.size * 2];
-            for(int i=0 ; i< this.student.size ; i++){
-                this.student.array[i] = anterior[i];
-            }
+    public void addStudent(Student student) {
+        if (avaiability == 0)
+            list.add(student);
+        else if( avaiability < capacity){
+
         }
-        this.student.array[size] =
-
     }
 
-   int getCapacity(){
-       return capacity;
-   }
-
-    void getAvailability() {
-       return avaiability;
+    int getCapacity() {
+        return capacity;
     }
 
-     getStudents(){
-       return this.student;
+    int getAvailability() {
+        return avaiability;
     }
 
-    public int getAverage(){
-        for(int i=0 ; i < student.size ; i++){
-            student.prom += this.student.score[i];
+    List<Student> getStudents() {
+        return this.list;
+    }
+
+    public double getAverage(){
+        for(int i=0;i<capacity;i++)
+        {
+            generalAverage += list.get(i).getAverage();
         }
-        student.prom /= student.size;
-        return student.prom;
+        generalAverage/=capacity;
+        return generalAverage;
     }
 
 }
