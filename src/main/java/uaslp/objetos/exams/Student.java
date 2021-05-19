@@ -3,16 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student{
-     List<Student> array;
-     int size;
+    int size;
      String studentName;
      int studentID;
-     double[] score;
-     double prom;
+     private Integer score[];
 
     public Student(String studentName, int studentID) {
         this.studentName = studentName;
         this.studentID = studentID;
+        score = new Integer[3];
     }
 
     public int getCode(){
@@ -24,18 +23,20 @@ public class Student{
     }
 
     public void setScore(int position,int score){
-         this.score[position] = score;
-    }
-
-    public void setAverage(){
-        for (int i = 0; i < size; i++) {
-            prom += score[i];
-        }
-        prom /= size;
+        if( position > 3 || position < 1)
+            throw new InvalidPartialException();
+            this.score[position-1] = score;
     }
 
     public double getAverage() {
-        return prom;
+        double average = 0;
+        for(int i=0;i<3;i++){
+            if( score[i] == null )
+                throw new MissingScoreException("Missing partial " + (i+1));
+            average = average + score[i];
+        }
+        average = average / 3;
+        return average;
     }
 
 }

@@ -1,9 +1,10 @@
 package uaslp.objetos.exams;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Group {
-    List<Student> list = new LinkedList<>();
+    private List<Student> list;
     int avaiability, capacity;
     double generalAverage;
 
@@ -11,15 +12,17 @@ public class Group {
 
     public Group(int size) {
         this.capacity = size;
+        this.avaiability = capacity;
+        list = new ArrayList<>(capacity);
     }
 
 
     public void addStudent(Student student) {
-        if (avaiability == 0)
-            list.add(student);
-        else if( avaiability < capacity){
+        if (avaiability <= 0)
+            throw new GroupIsFullException();
+        list.add(student);
+        avaiability--;
 
-        }
     }
 
     int getCapacity() {
@@ -35,11 +38,13 @@ public class Group {
     }
 
     public double getAverage(){
-        for(int i=0;i<capacity;i++)
+        Student student;
+        for(int i=0;i< list.size();i++)
         {
-            generalAverage += list.get(i).getAverage();
+            student = list.get(i);
+            generalAverage += student.getAverage();
         }
-        generalAverage/=capacity;
+        generalAverage/=list.size();
         return generalAverage;
     }
 
